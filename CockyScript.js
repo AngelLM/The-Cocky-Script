@@ -1,7 +1,7 @@
 var request = require('request'),
     cheerio = require('cheerio'),
     YTsuscriptors, YTviews,
-    TVfollowers, TVdesigns, TVdesignspages, TVurls = [], TVlikes = [], TVcomments = [], TVcollects = [], TVmakes = [], TVviews = [], TVdownloads = [],
+    TVfollowers, TVdesigns, TVdesignspages, TVurls = [], TVlikes = [], TVcomments = [], TVcollects = [], TVmakes = [], TVviews = [], TVdownloads = [], TVcounter = 1, TVlikesCounter = 0, TVcommentsCounter = 0, TVcollectsCounter = 0, TVmakesCounter = 0, TVviewsCounter = 0, TVdownloadsCounter = 0,
     TWfollowers;
 var youtubeUrl="https://www.youtube.com/user/ALM37454/about",
     twitterUrl="https://twitter.com/_AngelLM",
@@ -36,45 +36,46 @@ request(twitterUrl, function(err, resp, body){
     }
 });
 
-request(thingiverseUrl, function(err, resp, body){
+first_TV();
+
+
+function first_TV(){
+  request(thingiverseUrl, function(err, resp, body){
     if(!err && resp.statusCode == 200){
         var $ = cheerio.load(body);
         TVdesigns = $('.user-count','#main').eq(2).text().replace(/[^0-9.]/g, '');
         TVdesignspages=Math.ceil(TVdesigns/12);
         TVfollowers = $('.user-count','#main').eq(0).text().replace(/[^0-9.]/g, '');
-        adquireTVurls_function();
+        second_TV();
       }
     });
+}
 
-
-function adquireTVurls_function(){
-
-        for (var i=1; i<=TVdesignspages; i++){
-          var newurl = thingiverseUrl.concat("page:"+i);
+function second_TV(){
+          var newurl = thingiverseUrl.concat("page:" + TVcounter);
           request(newurl, function(err, resp, body){
             if(!err && resp.statusCode == 200){
                 var $ = cheerio.load(body);
                 $('.thing-img-wrapper','#profile-content').each(function(){
                     var thisurl = $(this).attr('href').toString();
                     TVurls.push(thisurl);
-                    //console.log(TVurls.length);
                 });
+                TVcounter+= 1;
+              }
+              if (TVcounter>TVdesignspages){
+                  TVcounter=0;
+                  third_TV();
+              }
+              else {
+                  second_TV();
               }
             });
-        }
-        console.log(TVdesigns);
-        console.log(TVurls.length);
-        if (TVurls.length==TVdesigns){
-          console.log("yupbro");
-        }
-      }
 
-function adquireTVstats_function(){
-        //console.log("segundo "+ TVurls.length); //do stuff
-        for(var t=0; t<TVurls.length; t++){
+        }
+
+function third_TV(){
           var preurl = "https://www.thingiverse.com";
-          var fullurl = preurl.concat(TVurls[t]);
-          console.log("#newurl: " + fullurl);
+          var fullurl = preurl.concat(TVurls[TVcounter]);
           request(fullurl, function(err, resp, body){
               if(!err && resp.statusCode == 200){
                   var $ = cheerio.load(body);
@@ -90,14 +91,42 @@ function adquireTVstats_function(){
                   TVcomments.push(TVcomment);
                   var TVmake = Number($('.thing-made','#thing-page').eq(1).text().replace(/[^0-9.]/g, ''));
                   TVmakes.push(TVmake);
-                  console.log("wat " + TVviews.length);
-                  /*console.log("Thingiverse stats");
-                  console.log("-------------");
-                  console.log("Followers: " + TVfollowers);
-                  console.log("# of likes: " + TVlikes);
-                  console.log(TVurls);
-                  console.log("");*/
+                  TVcounter+= 1;
+              }
+              if (TVcounter==TVurls.length){
+                  TVcounter= 0;
+                  forth_TV();
+              }
+              else {
+                  third_TV();
               }
         });
+
+  }
+
+  function forth_TV(){
+    TVlikesCounter += TVlikes[TVcounter];
+    TVcommentsCounter += TVcomments[TVcounter];
+    TVcollectsCounter += TVcollects[TVcounter];
+    TVmakesCounter += TVmakes[TVcounter];
+    TVviewsCounter += TVviews[TVcounter];
+    TVdownloadsCounter += TVdownloads[TVcounter];
+    TVcounter+= 1;
+    if(TVcounter==TVlikes.length){
+        console.log("-------------");
+        console.log("Thingiverse stats");
+        console.log("-------------");
+        console.log("Followers: " + TVfollowers);
+        console.log("# of views: " + TVviewsCounter);
+        console.log("# of downloads: " + TVdownloadsCounter);
+        console.log("# of likes: " + TVlikesCounter);
+        console.log("# of collects: " + TVcollectsCounter);
+        console.log("# of makes: " + TVmakesCounter);
+        console.log("");
+      }
+    else {
+      forth_TV();
     }
+
+
   }
