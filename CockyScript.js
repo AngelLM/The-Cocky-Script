@@ -2,9 +2,11 @@ var request = require('request'),
     cheerio = require('cheerio'),
     YTsuscriptors, YTviews,
     TVfollowers, TVdesigns, TVdesignspages, TVurls = [], TVlikes = [], TVcomments = [], TVcollects = [], TVmakes = [], TVviews = [], TVdownloads = [], TVcounter = 1, TVlikesCounter = 0, TVcommentsCounter = 0, TVcollectsCounter = 0, TVmakesCounter = 0, TVviewsCounter = 0, TVdownloadsCounter = 0,
-    TWfollowers;
+    TWfollowers,
+    HDfollowers, HDlikes;
 var youtubeUrl="https://www.youtube.com/user/ALM37454/about",
     twitterUrl="https://twitter.com/_AngelLM",
+    hackadayUrl="https://hackaday.io/AngelLM",
     thingiverseUrl="https://www.thingiverse.com/AngelLM/designs/";
 
 
@@ -19,7 +21,7 @@ request(youtubeUrl, function(err, resp, body){
         console.log("YouTube stats");
         console.log("-------------");
         console.log("Suscriptors: " + YTsuscriptors);
-        console.log("# of views: " + YTviews);
+        console.log("Views: " + YTviews);
         console.log("");
     }
 });
@@ -36,7 +38,26 @@ request(twitterUrl, function(err, resp, body){
     }
 });
 
+
+request(hackadayUrl, function(err, resp, body){
+    if(!err && resp.statusCode == 200){
+        var $ = cheerio.load(body);
+        HDfollowers = $('.followers').text().replace(/[^0-9.]/g, '');
+        HDlikes = $('.follows').text().replace(/[^0-9.]/g, '');
+        console.log("-------------");
+        console.log("Hackaday stats");
+        console.log("-------------");
+        console.log("Followers: " + HDfollowers);
+        console.log("Likes: " + HDlikes);
+        console.log("");
+    }
+});
+
+
+
 first_TV();
+
+
 
 
 function first_TV(){
@@ -117,11 +138,11 @@ function third_TV(){
         console.log("Thingiverse stats");
         console.log("-------------");
         console.log("Followers: " + TVfollowers);
-        console.log("# of views: " + TVviewsCounter);
-        console.log("# of downloads: " + TVdownloadsCounter);
-        console.log("# of likes: " + TVlikesCounter);
-        console.log("# of collects: " + TVcollectsCounter);
-        console.log("# of makes: " + TVmakesCounter);
+        console.log("Views: " + TVviewsCounter);
+        console.log("Downloads: " + TVdownloadsCounter);
+        console.log("Likes: " + TVlikesCounter);
+        console.log("Collects: " + TVcollectsCounter);
+        console.log("Makes: " + TVmakesCounter);
         console.log("");
       }
     else {
