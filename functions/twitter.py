@@ -1,8 +1,8 @@
 import bs4 as bs
 import urllib2
 
-def getStats():
-    TWurl = 'https://twitter.com/_AngelLM'
+def getStats(TWuser):
+    TWurl = 'https://twitter.com/' + TWuser
 
     req = urllib2.Request(TWurl, headers={ 'User-Agent': 'Mozilla/5.0' })
     source = urllib2.urlopen(req).read()

@@ -7,10 +7,10 @@ import time
 import math
 import bs4 as bs
 import urllib2
-import math
 import re
 
-def getStats():
+def getStats(IGuser):
+    IGurl='https://www.instagram.com/' + IGuser
     IGurls=[]
     IGreproductions = 0
     IGcomments = 0
@@ -18,7 +18,7 @@ def getStats():
 
 
     driver = webdriver.Firefox()
-    driver.get("https://www.instagram.com/angel_lm_/")
+    driver.get(IGurl)
 
     IGTopStats = driver.find_elements_by_class_name("_s53mj")
     IGTotalUploads = int((IGTopStats[0].text.split())[0])
@@ -52,5 +52,5 @@ def getStats():
             IGcomments += int(stats[0])
             IGlikes += int(stats[1])
 
-    IGarray = [IGTotalFollowers, IGlikes, IGreproductions, IGlikes]
+    IGarray = [IGTotalFollowers, IGlikes, IGreproductions, IGcomments]
     return IGarray;

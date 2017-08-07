@@ -2,8 +2,8 @@ import bs4 as bs
 import urllib2
 import math
 
-def getStats():
-    firstTVurl = 'https://www.thingiverse.com/AngelLM/designs/'
+def getStats(TVuser):
+    firstTVurl = 'https://www.thingiverse.com/' + TVuser + '/designs/'
     preurl = 'https://www.thingiverse.com'
     urlList=[]
     TVviews=0

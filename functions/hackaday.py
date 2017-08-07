@@ -1,8 +1,8 @@
 import bs4 as bs
 import urllib2
 
-def getStats():
-    HDurl = 'https://hackaday.io/AngelLM'
+def getStats(HDuser):
+    HDurl = 'https://hackaday.io/' + HDuser
     preurl = 'https://hackaday.io'
     urlList=[]
     HDlikes = 0

@@ -1,8 +1,8 @@
 import bs4 as bs
 import urllib2
 
-def getStats():
-    GHurl = 'https://github.com/AngelLM?utf8=%E2%9C%93&tab=repositories&q=&type=source&language='
+def getStats(GHuser):
+    GHurl = 'https://github.com/' + GHuser + '?utf8=%E2%9C%93&tab=repositories&q=&type=source&language='
     preurl = 'https://github.com'
     urlList = []
     GHwatchers = 0

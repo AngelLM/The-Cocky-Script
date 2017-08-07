@@ -1,8 +1,8 @@
 import bs4 as bs
 import urllib2
 
-def getStats():
-    YTurl = 'https://www.youtube.com/user/ALM37454'
+def getStats(YTuser):
+    YTurl = 'https://www.youtube.com/' + YTuser
     preurl = 'https://www.youtube.com'
     urlList = []
     YTlikes = 0
