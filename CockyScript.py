@@ -1,11 +1,12 @@
 import sys
-sys.path.append("functions")  
+sys.path.append("functions")
 import thingiverse
 import github
 import hackaday
 import youtube
 import twitter
 import googlegroups
+import instagram
 
 TVstats = thingiverse.getStats()
 print '----------------------'
@@ -64,5 +65,15 @@ print '----------------------'
 print 'Thor Google Group Stats'
 print '----------------------'
 print 'Total members: ' + str(GGstats)
+
+IGstats = instagram.getStats()
+print ''
+print '----------------------'
+print 'Instagram Stats'
+print '----------------------'
+print 'Total followers: ' + str(IGarray[0])
+print 'Total likes: ' + str(IGarray[1])
+print 'Total reproductions: ' + str(IGarray[2])
+print 'Total comments: ' + str(IGarray[3])
 print ''
 print ''
