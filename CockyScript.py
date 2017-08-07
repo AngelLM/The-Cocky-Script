@@ -7,9 +7,8 @@ import youtube
 import twitter
 import googlegroups
 import instagram
-import time
 
-t=time.time()
+# Users & Names variables. Fill them with your usernames if you want the stats of that platform. Leave it blank if you don't want the stats.
 
 TVuser = 'AngelLM'                                      # Thingiverse username. https://www.thingiverse.com/USERNAME/
 GHuser = 'AngelLM'                                      # GitHub username. https://github.com/USERNAME
@@ -96,6 +95,4 @@ if IGuser != '':
     print 'Total comments: ' + str(IGstats[3])
 
 print ''
-print ''
-print 'Elapsed time (s): ' + str(time.time()-t)
 print ''
