@@ -23,10 +23,10 @@ def getStats(IGuser):
     IGTopStats = driver.find_elements_by_class_name("_s53mj")
     IGTotalUploads = int((IGTopStats[0].text.split())[0])
     IGTotalFollowers = int((IGTopStats[1].text.split())[0])
-
     NowPublicationsRows = driver.find_elements_by_class_name("_myci9")
-    button = driver.find_element_by_class_name("_8imhp")
-    button.click()
+    if IGTotalUploads > 12:
+        button = driver.find_element_by_class_name("_8imhp")
+        button.click()
 
     while len(driver.find_elements_by_class_name("_myci9")) < math.ceil(IGTotalUploads/3.0):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
