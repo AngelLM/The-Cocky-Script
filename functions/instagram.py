@@ -52,6 +52,5 @@ def getStats():
             IGcomments += int(stats[0])
             IGlikes += int(stats[1])
 
-
     IGarray = [IGTotalFollowers, IGlikes, IGreproductions, IGlikes]
     return IGarray;
