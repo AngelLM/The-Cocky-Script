@@ -37,7 +37,6 @@ def getStats(IGuser):
             parent1=i.find_element_by_xpath('..')
             parent2=parent1.find_element_by_xpath('..')
             classPhoto = parent1.get_attribute("class").split()[0]
-            print classPhoto
             classRow = parent2.get_attribute("class")
             break
 
