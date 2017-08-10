@@ -34,7 +34,7 @@ def getStats(GHuser):
         GHstars += int(socialcounter[1].text)
         GHforks += int(socialcounter[2].text)
         if len(contrib[3].text)>0:
-            GHcontributors += int(contrib[3].text)
+            GHcontributors += int(contrib[3].text)-1
 
     GHarray = [GHfollowers, GHwatchers, GHstars, GHforks, GHcontributors]
     return GHarray;
