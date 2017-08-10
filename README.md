@@ -43,6 +43,9 @@ Currently the script is capable to scrap:
 
 * Twitter
   * Followers
+  * Likes (not in replies)
+  * Retweets (not in replies)
+  * Comments (not in replies)
 
 
 * Google Groups
