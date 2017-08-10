@@ -21,9 +21,6 @@ def getStats(TWuser):
     TWname = driver.find_element_by_class_name('ProfileHeaderCard-nameLink').text
     TWfollowers = int (driver.find_elements_by_class_name('ProfileNav-value')[2].get_attribute('data-count'))
 
-    while driver.find_element_by_class_name('back-to-top').is_displayed()==False:
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
     tweets = driver.find_elements_by_class_name('tweet')
     validTweets = []
     for t in tweets:
@@ -46,4 +43,4 @@ def getStats(TWuser):
     print TWcomments
 
     TWarray = [TWfollowers, TWlikes, TWretweets, TWcomments]
-    return TWarray
+    return TWarray 

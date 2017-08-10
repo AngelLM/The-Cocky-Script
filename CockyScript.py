@@ -65,15 +65,18 @@ if YTuser != '':
     print 'Total views: ' + str(YTstats[1])
     print 'Total likes: ' + str(YTstats[2])
     print 'Total dislikes: ' + str(YTstats[3])
-
+    
 if TWuser != '':
     TWstats = twitter.getStats(TWuser)
     print ''
     print '----------------------'
     print 'Twitter Stats'
     print '----------------------'
-    print 'Total followers: ' + str(TWstats)
-#
+    print 'Total followers: ' + str(TWstats[0])
+    print 'Total likes: ' + str(TWstats[1])
+    print 'Total retweets: ' + str(TWstats[2])
+    print 'Total comments: ' + str(TWstats[3])
+
 if GGname != '':
     GGstats = googlegroups.getStats(GGname)
     print ''
