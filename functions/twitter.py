@@ -40,10 +40,5 @@ def getStats(TWuser):
 
     driver.close()
 
-    print TWfollowers
-    print TWlikes
-    print TWretweets
-    print TWcomments
-
     TWarray = [TWfollowers, TWlikes, TWretweets, TWcomments]
     return TWarray
